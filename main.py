@@ -4,6 +4,8 @@
 #https://www.geeksforgeeks.org/python-check-if-a-file-or-directory-exists-2/
 #https://docs.python.org/3/library/re.html
 # https://www.geeksforgeeks.org/python-check-if-a-file-or-directory-exists-2/
+#Reading and writing to a file
+#https://www.geeksforgeeks.org/read-content-from-one-file-and-write-it-into-another-file/
 
 
 #This is the main file for the program. This is done in Python, and create in Pycharm
@@ -24,18 +26,28 @@ def fileManagement ():
     # file for regex
     # file = 'C:\\Users\\corne\\Downloads\\Individual1B\\A0B.txt' IT MUST BE IN THIS FORMAT FOR PROGRAM TO SEARCH
     patternMatch = r'^[A-Za-z][0-9][A-Za-z]\.txt$'
-    directory ="C:\\Users\\corne\\Downloads\\Individual1B"
+    directory =os.getcwd()
     listDirectory = os.listdir(directory) #This will list all the files in the directory
     #This is for important for the pattern match for same file named files.
     fileMatch = [file for file in listDirectory if re.fullmatch(patternMatch, file)]
+
     #Also need to account for these situations
     for file in os.listdir(directory):
         if file.endswith(".txt"):
             print(os.path.join(directory, file))
         if re.fullmatch(patternMatch, file):
             print("File:  ", file)
-        if
-
+    if len(fileMatch) == 0:
+        print("Error, no files found matching the file pattern:  ")
+    elif len(fileMatch) == 1:
+        print("File found:  ", fileMatch[0])
+    else:
+        print(f"Error: Multiple unique files found matching the file pattern: {fileMatch[:2]}")  # Show at least two unique files
+    #If there is EXACTLY 1 file matching the pattern, then it will copy the file to FOUNDit.txt
+    if len(fileMatch) == 1:
+        with open(fileMatch[0], 'r') as file:
+            with open('FOUNDit.txt', 'w') as newFile:
+                newFile.write(file.read())
 
 
 
