@@ -58,8 +58,13 @@ def fileManagement ():
     #Now print the file successfully copied to FOUNDit.txt with an ending message
     print("!SUCCESS. The file has been copied")
 
+    endProgram = input("Press ENTER to exit the program")
+    if endProgram == "":
+        print("You pressed ENTER")
+    else:
+        print("You did not press ENTER")
 
-
+    #In order to see the file created, you must end the program first. Once done, it will show.
 
 def execution():
     ent = input(
