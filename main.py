@@ -35,19 +35,29 @@ def fileManagement ():
     for file in os.listdir(directory):
         if file.endswith(".txt"):
             print(os.path.join(directory, file))
-        if re.fullmatch(patternMatch, file):
-            print("File:  ", file)
+
     if len(fileMatch) == 0:
         print("Error, no files found matching the file pattern:  ")
+        return
     elif len(fileMatch) == 1:
         print("File found:  ", fileMatch[0])
-    else:
-        print(f"Error: Multiple unique files found matching the file pattern: {fileMatch[:2]}")  # Show at least two unique files
+    elif len(fileMatch) > 1:
+        print(f"Error: Multiple unique files found matching the file pattern: {fileMatch}")
+        return# Show at least two unique files
     #If there is EXACTLY 1 file matching the pattern, then it will copy the file to FOUNDit.txt
     if len(fileMatch) == 1:
         with open(fileMatch[0], 'r') as file:
             with open('FOUNDit.txt', 'w') as newFile:
                 newFile.write(file.read())
+        print("File contents copied to FOUNDit.txt")
+
+    newFile = open('FOUNDit.txt', 'r')
+    print("The contents of the file cam from :", fileMatch)
+    print(newFile.read())
+    newFile.close()
+    #Now print the file successfully copied to FOUNDit.txt with an ending message
+    print("!SUCCESS. The file has been copied")
+
 
 
 
